@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'my_orders_screen.dart';
+import 'profile_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -33,9 +34,9 @@ class _MainScreenState extends State<MainScreen> {
   // Ekranların listesi
   final List<Widget> _screens = [
     HomeScreen(),
-    Scaffold(), // Diğer ekranlar placeholder olarak bırakılmış
-    MyOrdersScreen(), // Bildirimler (My Orders) ekranı
-    Scaffold(), // Diğer ekranlar placeholder olarak bırakılmış
+    Scaffold(),
+    MyOrdersScreen(),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -47,7 +48,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_selectedIndex], // Seçili ekranı gösterir
+      body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedIndex,
@@ -62,7 +63,7 @@ class _MainScreenState extends State<MainScreen> {
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications), // Bildirimler simgesi
+            icon: Icon(Icons.notifications),
             label: '',
           ),
           BottomNavigationBarItem(
