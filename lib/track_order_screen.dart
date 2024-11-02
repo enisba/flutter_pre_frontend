@@ -8,7 +8,7 @@ class TrackOrderScreen extends StatefulWidget {
 }
 
 class _TrackOrderScreenState extends State<TrackOrderScreen> {
-  Duration remainingTime = Duration(minutes: 43, seconds: 13); // Başlangıç süresi
+  Duration remainingTime = Duration(minutes: 43, seconds: 13);
   Timer? timer;
 
   @override
@@ -133,13 +133,13 @@ class _TrackOrderScreenState extends State<TrackOrderScreen> {
                           onPressed: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => ChatScreen()), // ChatScreen ekranına geçiş
+                              MaterialPageRoute(builder: (context) => ChatScreen()),
                             );
                           },
                         ),
                         Text(
-                          'Contact',
-                          style: TextStyle(color: Colors.grey[700]), // "Contact" yazısı
+                        'Contact', // Burada metin içeriğini sağlıyoruz
+                        style: TextStyle(color: Colors.grey[700]),
                         ),
                       ],
                     ),
