@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'my_orders_screen.dart';
 import 'profile_screen.dart';
+import 'track_order_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,10 +32,9 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
 
-  // Ekranların listesi
   final List<Widget> _screens = [
     HomeScreen(),
-    Scaffold(),
+    TrackOrderScreen(), // İkinci sekme TrackOrderScreen olarak ayarlandı
     MyOrdersScreen(),
     ProfileScreen(),
   ];
@@ -59,7 +59,7 @@ class _MainScreenState extends State<MainScreen> {
             label: '',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.navigation), // Harita simgesi veya yol simgesi
             label: '',
           ),
           BottomNavigationBarItem(
