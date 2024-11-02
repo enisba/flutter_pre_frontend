@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'home_screen.dart';
 import 'home_dashboard.dart';
-import 'my_orders_screen.dart';
 import 'profile_screen.dart';
 import 'track_order_screen.dart';
 import 'food_list_screen.dart';
 import 'add_new_item_screen.dart';
-
+import 'notifications_screen.dart';
+import 'market_profile_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -72,8 +72,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   int _selectedIndex = 0;
-
-  // Kullanıcı türüne göre ekran listesi
   late List<Widget> _screens;
 
   @override
@@ -84,15 +82,15 @@ class _MainScreenState extends State<MainScreen> {
       _screens = [
         HomeScreen(),
         TrackOrderScreen(),
-        MyOrdersScreen(),
+        NotificationsScreen(), // Notifications screen added here
         ProfileScreen(),
       ];
     } else {
       _screens = [
         HomeDashboardScreen(),
-        FoodListScreen(), // İkinci sekme market sahibi için food_list_screen
-        MyOrdersScreen(),
-        ProfileScreen(),
+        FoodListScreen(),
+        NotificationsScreen(), // Notifications screen added here for market owner
+        MarketProfileScreen(), // Market Profile Screen for market owner
       ];
     }
   }
@@ -109,21 +107,18 @@ class _MainScreenState extends State<MainScreen> {
       body: _screens[_selectedIndex],
       bottomNavigationBar: _buildCustomBottomNavigationBar(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: widget.userType == 'marketOwner'
+          ? FloatingActionButton(
         onPressed: () {
-          if (widget.userType == 'marketOwner') {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => AddNewItemScreen()),
-            );
-          }
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddNewItemScreen()),
+          );
         },
         backgroundColor: Colors.orange,
         child: Icon(Icons.add, size: 28),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-        ),
-      ),
+      )
+          : null,
     );
   }
 
@@ -148,9 +143,9 @@ class _MainScreenState extends State<MainScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             _buildBottomNavigationBarItem(Icons.grid_view, 0),
-            _buildBottomNavigationBarItem(Icons.menu, 1), // İkinci sekme food_list_screen için
-            SizedBox(width: 50), // Ortadaki floating button için boşluk
-            _buildBottomNavigationBarItem(Icons.notifications, 2),
+            _buildBottomNavigationBarItem(Icons.menu, 1),
+            SizedBox(width: 50), // Spacing for the floating button
+            _buildBottomNavigationBarItem(Icons.notifications, 2), // Notifications icon
             _buildBottomNavigationBarItem(Icons.person, 3),
           ],
         ),
@@ -181,21 +176,6 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
         ],
-      ),
-    );
-  }
-}
-
-// Market sahibinin ekleme ekranı (Örnek)
-class MarketAddItemScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Add Item'),
-      ),
-      body: Center(
-        child: Text('Market sahibi burada yeni ürünler ekleyebilir'),
       ),
     );
   }
